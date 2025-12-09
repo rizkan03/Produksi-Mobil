@@ -1,0 +1,75 @@
+﻿@{
+    ViewBag.Title = "Rencana Produksi";
+}
+
+<h2>Rencana Produksi</h2>
+
+<form action="/Planning/Proses" method="post">
+    <table border="1" cellpadding="6">
+        <tr>
+            <th>Hari</th>
+            <th>Input</th>
+        </tr>
+        <tr>
+        <td>Senin</td><td><input type="number" name="senin" required /></td>
+        </tr>
+        <tr>
+        <td>Selasa</td><td><input type="number" name="selasa" required /></td>
+        </tr>
+        <tr>
+        <td>Rabu</td><td><input type="number" name="rabu" required /></td>
+        </tr>
+        <tr>
+        <td>Kamis</td><td><input type="number" name="kamis" required /></td>
+        </tr>
+        <tr>
+        <td>Jumat</td><td><input type="number" name="jumat" required /></td>
+        </tr>
+        <tr>
+        <td>Sabtu</td><td><input type="number" name="sabtu" required /></td>
+        </tr>
+        <tr>
+        <td>Minggu</td><td><input type="number" name="minggu" required /></td>
+        </tr>
+    </table>
+
+    <br />
+    <button type="submit">Proses</button>
+</form>
+
+<br />
+<br />
+
+@if (ViewBag.History != null && ViewBag.History.Count > 0)
+{
+    <h3>Riwayat Proses</h3>
+
+    <table class="table table-bordered table-striped table-hover display">
+        <thead class="bg-primary">
+            <tr>
+                <th>No</th>
+                <th>Input</th>
+                <th>Output</th>
+                <th>Total</th>
+                <th>Waktu</th>
+            </tr>
+        </thead>
+        <tbody>
+            @{
+                var i = 1;
+                var number = 0;
+            }
+            @foreach (var h in ViewBag.History)
+            {
+                number = i++;
+                <tr>
+                    <td>@number</td>
+                    <td>@h.InputData</td>
+                    <td>@h.OutputData</td>
+                    <td>@h.TotalProduksi</td>
+                    <td>@h.CreatedDate.ToString("dd/MM/yyyy HH:mm")</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
